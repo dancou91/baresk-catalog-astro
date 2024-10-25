@@ -1,5 +1,12 @@
 ---
+import directus from "../lib/directus";
+import { readItems } from "@directus/sdk";
 
+const products = await directus.request(
+	readItems("products", {
+		fields: ["*", { product_category: ["*"] }, { product_brand: ["*"] }],
+	}),
+);
 ---
 
 <html lang="en">
@@ -11,6 +18,19 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astross</h1>
+		<h1>Catalogo Baresk</h1>
+		<section>
+			<div class="product-list">
+				{
+					products.map((product) => (
+						<div class="product">
+							<h2>{product.product_name}</h2>
+							<p>Volume: {product.product_volume_ml} ml</p>
+							<p>Price: ${product.product_price}</p>
+						</div>
+					))
+				}
+			</div>
+		</section>
 	</body>
 </html>
