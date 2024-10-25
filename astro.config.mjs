@@ -5,5 +5,6 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
     integrations: [tailwind()],
-    site: 'https://dancou91.github.io'
+    site: 'https://dancou91.github.io',
+    base: 'baresk-catalog-astro',
 });
