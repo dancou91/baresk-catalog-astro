@@ -1,16 +1,16 @@
 import { createDirectus, rest, } from '@directus/sdk';
 
-type ProductCategory = {
+export type ProductCategory = {
     id: string;
     category_name: string;
 };
 
-type ProductBrand = {
+export type ProductBrand = {
     id: string;
     brand_name: string;
 };
 
-type Product = {
+export type Product = {
     id: string;
     status: "draft" | "published" | "archived"; // Ajusta según los estados posibles
     user_created: string;

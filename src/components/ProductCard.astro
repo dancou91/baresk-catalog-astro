@@ -1,0 +1,41 @@
+---
+import type { Product } from "../lib/directus";
+
+interface Props {
+    product: Product;
+}
+
+const { product } = Astro.props;
+const { product_name, product_price, product_image, product_brand } = product;
+const defaultImage = "/images/product-placeholder.jpg";
+
+const handleImageError = `this.onerror=null; this.src='${defaultImage}'`;
+---
+
+<article
+    class="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+>
+    <div class="relative aspect-square overflow-hidden">
+        <img
+            src={`http://152.42.139.164:8055/assets/${product_image}`}
+            alt={product_name}
+            class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-300"
+        />
+    </div>
+    <div class="p-6">
+        <h3 class="text-lg font-medium text-skin-dark mb-2">{product_name}</h3>
+        <p class="text-sm text-gray-600 mb-4 line-clamp-2">
+            {product_brand.brand_name}
+        </p>
+        <div class="flex justify-between items-center">
+            <span class="text-lg font-semibold text-skin-accent"
+                >{product_price}€</span
+            >
+            <button
+                class="bg-skin-accent/10 hover:bg-skin-accent/20 text-skin-accent px-4 py-2 rounded-full text-sm font-medium transition-colors"
+            >
+                Ver detalles
+            </button>
+        </div>
+    </div>
+</article>

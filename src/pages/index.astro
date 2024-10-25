@@ -1,4 +1,6 @@
 ---
+import ProductCard from "../components/ProductCard.astro";
+import Layout from "../layouts/Layout.astro";
 import directus from "../lib/directus";
 import { readItems } from "@directus/sdk";
 
@@ -9,124 +11,28 @@ const products = await directus.request(
 );
 ---
 
-<html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Baresk - Catalog</title>
-		<style>
-			body {
-				font-family: Arial, sans-serif;
-				background-color: #f8f9fa;
-			}
-			.product-container {
-				max-width: 800px;
-				margin: 20px auto;
-				padding: 20px;
-				background-color: #ffffff;
-				border-radius: 8px;
-				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			}
-			.product-header {
-				display: flex;
-				align-items: center;
-				gap: 20px;
-			}
-			.product-image img {
-				width: 200px;
-				height: auto;
-				border-radius: 8px;
-			}
-			.product-info h1 {
-				font-size: 1.5em;
-				margin: 0;
-				color: #333333;
-			}
-			.product-price {
-				font-size: 1.2em;
-				color: #27ae60;
-				margin: 10px 0;
-			}
-			.product-section {
-				margin-top: 20px;
-			}
-			.product-section h3 {
-				margin-top: 0;
-				color: #34495e;
-			}
-		</style>
-	</head>
-	<body>
-		{
-			products.map((product) => (
-				<div class="product-container">
-					<div class="product-header">
-						<div class="product-image">
-							<img
-								src={`https://example.com/product_image/${product.product_image}`}
-								alt="Imagen del producto"
-							/>
-						</div>
-						<div class="product-info">
-							<h1>{product.product_name}</h1>
-							<p>
-								<strong>Marca:</strong>{" "}
-								{product.product_brand.brand_name}
-							</p>
-							<p>
-								<strong>Categoría:</strong>{" "}
-								{product.product_category.category_name}
-							</p>
-							<p class="product-price">
-								{product.product_price} €
-							</p>
-							<p>
-								<strong>Volumen:</strong>{" "}
-								{product.product_volume_ml} ml
-							</p>
-							<p>
-								<strong>Tipo de piel:</strong>{" "}
-								{product.catalog_skin_type ?? "N/A"}
-							</p>
-						</div>
-					</div>
+<Layout title="Skincare Catalog | Inicio">
+	<section class="relative bg-skin-primary py-20 sm:py-32">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<h1 class="text-4xl sm:text-5xl font-semibold text-skin-dark mb-6">
+				Cuida tu piel con los mejores productos
+			</h1>
+			<p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+				Descubre nuestra selección de productos para una piel saludable y radiante
+			</p>
+		</div>
+	</section>
 
-					<div class="product-section">
-						<h3>Descripción del producto</h3>
-						<div
-							set:html={
-								product.catalog_product_description ??
-								"<p>No disponible.</p>"
-							}
-						/>
-					</div>
-
-					<div class="product-section">
-						<h3>Beneficios</h3>
-						<p>{product.catalog_benefits ?? "N/A"}</p>
-					</div>
-
-					<div class="product-section">
-						<h3>Ingredientes</h3>
-						<div
-							set:html={
-								product.catalog_product_ingredients ??
-								"<p>No disponible.</p>"
-							}
-						/>
-					</div>
-
-					<div class="product-section">
-						<h3>Modo de uso</h3>
-						<div
-							set:html={
-								product.catalog_product_usage ??
-								"<p>No disponible.</p>"
-							}
-						/>
-					</div>
-				</div>
-			))
-		}
-	</body>
-</html>
+	<section class="py-16 sm:py-24">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<h2 class="text-3xl font-medium text-center text-skin-dark mb-12">
+				Productos Destacados
+			</h2>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+				{products.map(product => (
+					<ProductCard {product} />
+				))}
+			</div>
+		</div>
+	</section>
+</Layout>

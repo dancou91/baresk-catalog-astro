@@ -1,0 +1,48 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Catálogo de productos para el cuidado de la piel" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen flex flex-col bg-white">
+		<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-skin-secondary">
+			<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex justify-between items-center h-16">
+					<a href="/" class="text-2xl font-semibold tracking-wider text-skin-dark">
+						SKINCARE
+					</a>
+					<ul class="flex space-x-8">
+						<li><a href="/" class="text-skin-dark hover:text-skin-accent transition-colors">Inicio</a></li>
+						<li><a href="/productos" class="text-skin-dark hover:text-skin-accent transition-colors">Productos</a></li>
+						<li><a href="/rutina" class="text-skin-dark hover:text-skin-accent transition-colors">Tu Rutina</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		
+		<main class="flex-1">
+			<slot />
+		</main>
+
+		<footer class="bg-skin-primary py-8">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-skin-dark/80">
+				<p>&copy; {new Date().getFullYear()} Skincare Catalog. Todos los derechos reservados.</p>
+			</div>
+		</footer>
+	</body>
+</html>
