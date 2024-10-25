@@ -9,28 +9,124 @@ const products = await directus.request(
 );
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Baresk - Catalog</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				background-color: #f8f9fa;
+			}
+			.product-container {
+				max-width: 800px;
+				margin: 20px auto;
+				padding: 20px;
+				background-color: #ffffff;
+				border-radius: 8px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			}
+			.product-header {
+				display: flex;
+				align-items: center;
+				gap: 20px;
+			}
+			.product-image img {
+				width: 200px;
+				height: auto;
+				border-radius: 8px;
+			}
+			.product-info h1 {
+				font-size: 1.5em;
+				margin: 0;
+				color: #333333;
+			}
+			.product-price {
+				font-size: 1.2em;
+				color: #27ae60;
+				margin: 10px 0;
+			}
+			.product-section {
+				margin-top: 20px;
+			}
+			.product-section h3 {
+				margin-top: 0;
+				color: #34495e;
+			}
+		</style>
 	</head>
 	<body>
-		<h1>Catalogo Baresk</h1>
-		<section>
-			<div class="product-list">
-				{
-					products.map((product) => (
-						<div class="product">
-							<h2>{product.product_name}</h2>
-							<p>Volume: {product.product_volume_ml} ml</p>
-							<p>Price: ${product.product_price}</p>
+		{
+			products.map((product) => (
+				<div class="product-container">
+					<div class="product-header">
+						<div class="product-image">
+							<img
+								src={`https://example.com/product_image/${product.product_image}`}
+								alt="Imagen del producto"
+							/>
 						</div>
-					))
-				}
-			</div>
-		</section>
+						<div class="product-info">
+							<h1>{product.product_name}</h1>
+							<p>
+								<strong>Marca:</strong>{" "}
+								{product.product_brand.brand_name}
+							</p>
+							<p>
+								<strong>Categoría:</strong>{" "}
+								{product.product_category.category_name}
+							</p>
+							<p class="product-price">
+								{product.product_price} €
+							</p>
+							<p>
+								<strong>Volumen:</strong>{" "}
+								{product.product_volume_ml} ml
+							</p>
+							<p>
+								<strong>Tipo de piel:</strong>{" "}
+								{product.catalog_skin_type ?? "N/A"}
+							</p>
+						</div>
+					</div>
+
+					<div class="product-section">
+						<h3>Descripción del producto</h3>
+						<div
+							set:html={
+								product.catalog_product_description ??
+								"<p>No disponible.</p>"
+							}
+						/>
+					</div>
+
+					<div class="product-section">
+						<h3>Beneficios</h3>
+						<p>{product.catalog_benefits ?? "N/A"}</p>
+					</div>
+
+					<div class="product-section">
+						<h3>Ingredientes</h3>
+						<div
+							set:html={
+								product.catalog_product_ingredients ??
+								"<p>No disponible.</p>"
+							}
+						/>
+					</div>
+
+					<div class="product-section">
+						<h3>Modo de uso</h3>
+						<div
+							set:html={
+								product.catalog_product_usage ??
+								"<p>No disponible.</p>"
+							}
+						/>
+					</div>
+				</div>
+			))
+		}
 	</body>
 </html>
