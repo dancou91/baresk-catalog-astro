@@ -12,13 +12,32 @@ const products = await directus.request(
 ---
 
 <Layout title="Skincare Catalog | Inicio">
+
+	<section
+		class="filter grayscale hero h-svh bg-cover bg-center flex items-center justify-center text-white"
+		style="background-image: url('/baresk-catalog-astro/hero-image.jpg')"
+	>
+		<!-- <div class="text-center p-4 bg-black/50 rounded-md">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+				<h1 class="text-4xl sm:text-5xl font-semibold mb-6">
+					Cuida tu piel con los mejores productos
+				</h1>
+				<p class="text-lg sm:text-xl max-w-2xl mx-auto">
+					Descubre nuestra selección de productos para una piel saludable
+					y radiante
+				</p>
+			</div>
+		</div> -->
+	</section>
+
 	<section class="relative bg-skin-primary py-20 sm:py-32">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 			<h1 class="text-4xl sm:text-5xl font-semibold text-skin-dark mb-6">
 				Cuida tu piel con los mejores productos
 			</h1>
 			<p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-				Descubre nuestra selección de productos para una piel saludable y radiante
+				Descubre nuestra selección de productos para una piel saludable
+				y radiante
 			</p>
 		</div>
 	</section>
@@ -26,9 +45,7 @@ const products = await directus.request(
 	<section class="py-16 sm:py-24">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-				{products.map(product => (
-					<ProductCard {product} />
-				))}
+				{products.map((product) => <ProductCard {product} />)}
 			</div>
 		</div>
 	</section>
