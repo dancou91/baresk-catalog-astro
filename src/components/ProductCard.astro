@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { product } = Astro.props;
-const { product_name, product_price, product_image, product_brand } = product;
+const { id, product_name, product_price, product_image, product_brand } = product;
 const defaultImage = "/images/product-placeholder.jpg";
 
 const handleImageError = `this.onerror=null; this.src='${defaultImage}'`;
@@ -34,7 +34,8 @@ const handleImageError = `this.onerror=null; this.src='${defaultImage}'`;
             <button
                 class="bg-skin-accent/10 hover:bg-skin-accent/20 text-skin-accent px-4 py-2 rounded-full text-sm font-medium transition-colors"
             >
-                Ver detalles
+                <a href={`/baresk-catalog-astro/products/${id}`}>Ver detalles</a>
+                
             </button>
         </div>
     </div>
