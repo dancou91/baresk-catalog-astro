@@ -5,9 +5,9 @@ export default {
     extend: {
       colors: {
         skin: {
-          primary: '#86efac33',
+          primary: '#e0fb88',
           secondary: '#E8D5CF',
-          accent: '#86efac',
+          accent: '#ff9b50',
           dark: '#333333'
         }
       },
