@@ -12,7 +12,6 @@ const products = await directus.request(
 ---
 
 <Layout title="Skincare Catalog | Inicio">
-
 	<section
 		class="filter grayscale hero h-svh bg-cover bg-center flex items-center justify-center text-white"
 		style="background-image: url('/catalog/hero-image.jpg')"
@@ -47,7 +46,15 @@ const products = await directus.request(
 	<section class="py-16 sm:py-24">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-				{products.map((product) => <ProductCard {product} />)}
+				{
+					[...products]
+						.sort(
+							(a, b) =>
+								a.product_category?.sort -
+								b.product_category?.sort,
+						)
+						.map((product) => <ProductCard {product} />)
+				}
 			</div>
 		</div>
 	</section>
