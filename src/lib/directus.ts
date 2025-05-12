@@ -3,6 +3,7 @@ import { createDirectus, rest, } from '@directus/sdk';
 export type ProductCategory = {
     id: string;
     category_name: string;
+    sort: number;
 };
 
 export type ProductBrand = {
